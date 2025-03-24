@@ -59,10 +59,10 @@ public class AddUser {
     public void SaveButton(){
         SaveButton.click();
     }
-
-
-
-
+    public void modifUserName(){
+        Username.clear();
+        UserRole.sendKeys("PEPE");
+    }
 
 }
 

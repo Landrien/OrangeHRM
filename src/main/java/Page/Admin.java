@@ -8,15 +8,19 @@ import org.openqa.selenium.support.PageFactory;
 public class Admin {
     WebDriver driver;
     @FindBy(xpath = "//h6[1]")
-    private WebElement AdminTitle;
+    WebElement AdminTitle;
     @FindBy(xpath = "//div[@class = 'orangehrm-header-container']/button")
-    private WebElement AddButton;
+    WebElement AddButton;
     @FindBy(xpath = "//div[@class = '--toggle']/button")
-    private WebElement ArrowButton;
+    WebElement ArrowButton;
     @FindBy(xpath = "//div[@class = 'oxd-input-group oxd-input-field-bottom-space']/div/input[@class = 'oxd-input oxd-input--active']")
-    private WebElement UsernameField;
+    WebElement UsernameField;
     @FindBy(xpath = "//button[@class = 'oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space']")
-    private WebElement SearchButton;
+    WebElement SearchButton;
+    @FindBy (xpath = "//button[@class = 'oxd-icon-button oxd-table-cell-action-space'][2]")
+    WebElement EditButton;
+    @FindBy (xpath = "//button[@class = 'oxd-icon-button oxd-table-cell-action-space'][1]")
+    WebElement DeleteButton;
 
     public Admin(WebDriver driver) {
         this.driver = driver;
@@ -37,6 +41,12 @@ public class Admin {
     }
     public WebElement getAdminTitle() {
         return AdminTitle;
+    }
+    public void clickEditButton() {
+        EditButton.click();
+    }
+    public void clickDeleteButton() {
+        DeleteButton.click();
     }
 
 
