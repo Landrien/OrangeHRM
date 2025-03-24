@@ -1,5 +1,3 @@
-package BaseTest;
-
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.WebDriver;
@@ -27,7 +25,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void setup(ITestResult result) {
-        
+
         String Browser = ConfigReader.getProperty("Browser").toLowerCase();
         switch (Browser) {
             case "edge" -> driver = new EdgeDriver();
