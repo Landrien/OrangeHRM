@@ -2,8 +2,12 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.chromium.ChromiumDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -27,10 +31,32 @@ public class BaseTest {
     public void setup(ITestResult result) {
 
         String Browser = ConfigReader.getProperty("Browser").toLowerCase();
+        Boolean hea = Boolean.valueOf(ConfigReader.getProperty("headless"));
         switch (Browser) {
-            case "edge" -> driver = new EdgeDriver();
-            case "firefox" -> driver = new FirefoxDriver();
-            default -> driver = new ChromeDriver();
+            case "edge" -> {
+                EdgeOptions options = new EdgeOptions();
+                if (hea) {
+                    options.addArguments("--headless");
+                }
+                options.addArguments("--incognito");
+                driver = new EdgeDriver(options);
+            }
+            case "firefox" -> {
+                FirefoxOptions options = new FirefoxOptions();
+                if (hea) {
+                    options.addArguments("--headless");
+                }
+                options.addArguments("--incognito");
+                driver = new FirefoxDriver(options);
+            }
+            case "chrome", default -> {
+                ChromeOptions options = new ChromeOptions();
+                if (hea) {
+                    options.addArguments("--headless");
+                }
+                options.addArguments("--incognito");
+                driver = new ChromeDriver(options);
+            }
         }
 
         driver.manage().window().maximize();
